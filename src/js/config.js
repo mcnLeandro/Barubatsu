@@ -30,6 +30,10 @@ export const TARGETIDs = {
     //gamePage
     board: "board",
     gameInfo: "game-info",
-    players: "players"
+    players: "players",
+    //endGamePopUp
+    endGamePopUp: "end-game-popup",
+    goToTop: "go-to-top-btn",
+    retry: "retry-btn",
 
 }

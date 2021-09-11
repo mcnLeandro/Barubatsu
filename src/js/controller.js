@@ -22,15 +22,23 @@ export class AppsController {
         BoardsController.setN(boardLength)
         BoardsController.setPlayers(playersParams.map(params => PlayersController.create(params)))
         //playerシャッフルしたり可能
-        BoardsController.setBoard()
         AppsController.gamePage()
 
     }
     static gamePage(){
 
+        BoardsController.setBoard()
+        BoardsController.setFistPlayer()
+
         AppsView.gamePage()
         AppsListener.gamePage()
         BoardsView.displayGameInfo(`${Board.players[Board.nextPlayerIndex].name} is the Next`)
+
+    }
+    static endGamePopUp(player){
+
+        AppsView.endGamePopUp(player)
+        AppsListener.endGamePopUp()
 
     }
 
@@ -47,6 +55,9 @@ export class BoardsController{
 
         Board.n = n 
 
+    }
+    static setFistPlayer(){
+        Board.nextPlayerIndex = 0;
     }
     static setBoard(){
         
@@ -116,10 +127,12 @@ export class BoardsController{
             }
 
             if(horizontal == l){
+                AppsController.endGamePopUp(player)
                 BoardsView.displayGameInfo(`${player.name} won with horazontal line`)
                 isThereWinner = true;
             }
             if(vertical == l){
+                AppsController.endGamePopUp(player)
                 BoardsView.displayGameInfo(`${player.name} won with vertical line`)
                 isThereWinner = true;
             }
@@ -142,10 +155,12 @@ export class BoardsController{
         }
 
         if(upperLeft === l){
+            AppsController.endGamePopUp(player)
             BoardsView.displayGameInfo(`${player.name} won with upperLeft line`)
             isThereWinner = true;
         }
         if(upperRight === l){
+            AppsController.endGamePopUp(player)
             BoardsView.displayGameInfo(`${player.name} won with upperRight line`)
             isThereWinner = true;
         }

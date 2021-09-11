@@ -77,6 +77,21 @@ export class AppsView {
         PlayersView.set()
 
     }
+    static endGamePopUp(player){
+        const body = document.querySelector("body")
+        body.classList.add("position-relative")
+
+        body.innerHTML += `
+        <div id="${TARGETIDs.endGamePopUp}" class="position-absolute top-50 start-50 translate-middle bg-danger card" >
+            <div class="card-body">
+                <h5 class="card-title">${player? player.name:"unknown"} is the winner!!!🎉</h5>
+                <button id="${TARGETIDs.goToTop}" class="btn btn-info">Got to Top</button>
+                <button id="${TARGETIDs.retry}" class="btn btn-info">Retry</button>
+            </div>
+        </div>
+        `
+
+    }
 
 
 }

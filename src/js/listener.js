@@ -1,6 +1,6 @@
 import { Board } from "./model";
 import { AppsController, BoardsController, PlayersController } from "./controller";
-import { TARGETIDs , LIMITATION} from "./config";
+import { TARGETIDs , LIMITATION } from "./config";
 
 export class AppsListener {
 
@@ -43,6 +43,21 @@ export class AppsListener {
     static gamePage(){
 
         BoardsListener.set()
+
+    }
+    static endGamePopUp(){
+
+        const deletePopUp = ()=>{
+            document.getElementById(TARGETIDs.endGamePopUp).remove()
+        }
+        document.getElementById(TARGETIDs.goToTop).addEventListener("click", function(){
+            deletePopUp()
+            AppsController.topPage()
+        })
+        document.getElementById(TARGETIDs.retry).addEventListener("click",function(){
+            deletePopUp()
+            AppsController.gamePage()
+        })
 
     }
 
