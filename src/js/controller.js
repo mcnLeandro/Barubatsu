@@ -30,6 +30,7 @@ export class AppsController {
 
         AppsView.gamePage()
         AppsListener.gamePage()
+        BoardsView.displayGameInfo(`${Board.players[Board.nextPlayerIndex].name} is the Next`)
 
     }
 
@@ -86,14 +87,21 @@ export class BoardsController{
 
         // change next player
 
+        
+        this.changeTurn()
+        if(!this.checkBoard(player)) BoardsView.displayGameInfo(`${Board.players[Board.nextPlayerIndex].name} is the Next`)
+
+
+    }
+    static changeTurn(){
+
         if(Board.nextPlayerIndex < Board.players.length-1)Board.nextPlayerIndex++;
         else Board.nextPlayerIndex = 0;
-        
-        this.checkBoard(player)
 
     }
     static checkBoard(player){
 
+        let isThereWinner = false;
         let l = Board.n
         let horizontal = 0
         let vertical = 0
@@ -108,10 +116,12 @@ export class BoardsController{
             }
 
             if(horizontal == l){
-                console.log("win with horazontal")
+                BoardsView.displayGameInfo(`${player.name} won with horazontal line`)
+                isThereWinner = true;
             }
             if(vertical == l){
-                console.log("win with vertical")
+                BoardsView.displayGameInfo(`${player.name} won with vertical line`)
+                isThereWinner = true;
             }
 
             horizontal = 0;
@@ -132,13 +142,17 @@ export class BoardsController{
         }
 
         if(upperLeft === l){
-            console.log("win with upperLeft")
+            BoardsView.displayGameInfo(`${player.name} won with upperLeft line`)
+            isThereWinner = true;
         }
         if(upperRight === l){
-            console.log("win with upperRight")
+            BoardsView.displayGameInfo(`${player.name} won with upperRight line`)
+            isThereWinner = true;
         }
         upperLeft = 0;
         upperRight = 0;
+
+        return isThereWinner
         
     }
 

@@ -118,6 +118,14 @@ export class BoardsView {
 
         document.getElementById(TARGETIDs.board).innerHTML = boardHTML
     }
+    static displayGameInfo(message){
+
+        document.getElementById(TARGETIDs.gameInfo).innerHTML = `
+        <h4 class="d-flex justify-content-center">${message}</h4>
+        `
+
+    }
+
 }
 export class PlayersView {
 
