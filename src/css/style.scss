@@ -1,0 +1,9 @@
+.box {
+    height: 100px;
+    width: 100px;
+    min-width: 0; //追加
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
