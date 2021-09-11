@@ -18,7 +18,7 @@ export class AppsView {
         const boardLengthSelect = () => {
 
             let selectHTML = `
-            <select id="" class="p-2 text-2vw form-select" >`
+            <select id="${TARGETIDs.boardLengthSelect}" class="p-2 text-2vw form-select" >`
             for (let i = LIMITATION.minBoardLength; i <= LIMITATION.maxBoardLength; i++) {
                 selectHTML+=`
                 <option class="p-3 text-2vw" value="${i}">${i}</option>`
@@ -54,6 +54,7 @@ export class AppsView {
                 <div class="d-flex justify-content-center mt-3">
                     <i id="${TARGETIDs.addPlayerInfo}" class="fas fa-plus-circle fa-2x text-info"></i>
                 </div>
+                
 
                 <div class="d-flex justify-content-end">
                     <button id="${TARGETIDs.gameStart}"class="btn btn-primary">Game Start</button>
@@ -157,7 +158,7 @@ export class PlayersViewTamplate{
     static form(isDeletable){
 
         return `
-        <div class="d-flex justify-content-between mt-3">
+        <div class="${TARGETIDs.playerInfo} d-flex justify-content-between mt-3">
 
             <div class="col-6">
                 <input type="text" class="form-control col-6" placeholder="name">
@@ -174,7 +175,7 @@ export class PlayersViewTamplate{
 
             ${isDeletable ? 
                 `<div class="align-self-center col-1">
-                    <i id="${TARGETIDs.removePlayerInfo}" class="fas fa-minus-circle fa-2x text-danger"></i>
+                    <i class="${TARGETIDs.removePlayerInfo} fas fa-minus-circle fa-2x text-danger"></i>
                 </div>`
                 : 
                 `<div class="col-1"></div>`

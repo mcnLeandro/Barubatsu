@@ -21,7 +21,9 @@ export const TARGETIDs = {
     //topPage
     newGame:"new-game-btn",
     //gameSettingPage
+    boardLengthSelect: "board-length-select",
     playersInfo: "players-info",
+    playerInfo: "player-info",
     addPlayerInfo: "add-user-info-btn",
     removePlayerInfo : "remove-user-info-btn",
     gameStart: "game-start-btn",

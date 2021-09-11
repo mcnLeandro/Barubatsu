@@ -1,6 +1,6 @@
 import { Board } from "./model";
 import { AppsController, BoardsController, PlayersController } from "./controller";
-import { TARGETIDs } from "./config";
+import { TARGETIDs , LIMITATION} from "./config";
 
 export class AppsListener {
 
@@ -13,12 +13,32 @@ export class AppsListener {
     }
     static gameSettingPage(){
 
-        document.getElementById(TARGETIDs.addPlayerInfo).addEventListener("click",function(){
+        document.getElementById(TARGETIDs.addPlayerInfo)?.addEventListener("click",function(){
 
             PlayersController.addForm()
 
         })
-        document.getElementById
+
+        // PlayersListener.form()
+        
+        document.getElementById(TARGETIDs.gameStart).addEventListener("click",function(){
+
+            const boardLength =  Number(document.getElementById(TARGETIDs.boardLengthSelect).value)
+
+            const playersParams = []
+            document.querySelectorAll(`#${TARGETIDs.playersInfo} .${TARGETIDs.playerInfo}`).forEach( ele => {
+
+                playersParams.push({
+                    name: ele.querySelector("input").value ,
+                    symbol: ele.querySelector("select").value,
+                })
+
+            })
+
+            AppsController.create({boardLength: boardLength, playersParams: playersParams})
+
+        })
+
     }
     static gamePage(){
 
@@ -41,4 +61,21 @@ export class BoardsListener{
         }
 
     }
+}
+
+export class PlayersListener {
+
+    static form(){
+
+        document.querySelectorAll(`.${TARGETIDs.removePlayerInfo}`).forEach(ele => {
+            ele.addEventListener("click",function(){
+
+                this.closest(`.${TARGETIDs.playerInfo}`).remove()
+                PlayersController.addAddPlayerBtnIfIsntLimit()
+
+            })
+        })
+
+    }
+
 }

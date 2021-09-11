@@ -1,7 +1,7 @@
 import { Board, Player } from "./model";
-import { SYMBOLS , TARGETIDs} from "./config";
+import { LIMITATION, SYMBOLS , TARGETIDs} from "./config";
 import { BoardsView, PlayersView, AppsView, PlayersViewTamplate } from "./view";
-import { AppsListener, BoardsListener } from "./listener";
+import { AppsListener, BoardsListener , PlayersListener} from "./listener";
 
 export class AppsController {
 
@@ -17,37 +17,38 @@ export class AppsController {
         AppsListener.gameSettingPage()
 
     }
+    static create({boardLength, playersParams}){
+
+        BoardsController.setN(boardLength)
+        BoardsController.setPlayers(playersParams.map(params => PlayersController.create(params)))
+        //playerシャッフルしたり可能
+        BoardsController.setBoard()
+        AppsController.gamePage()
+
+    }
     static gamePage(){
 
         AppsView.gamePage()
         AppsListener.gamePage()
 
     }
-    static startGame(){}
 
 }
 export class BoardsController{
 
-    static gameStart(){
+    static setPlayers(players){
 
-        if(Board.players.length === 0) return
-        
-        //ここでplayerはシャッフルできる。
-        BoardsView.set()
-        BoardsListener.set()
-
-        PlayersView.set()
-        
-    }
-    static addPlayer(player){
-
-        Board.players.push(player)
+        Board.players = players;
         
 
     }
-    static setBoard(n){
+    static setN(n){
+
+        Board.n = n 
+
+    }
+    static setBoard(){
         
-        Board.n = n // 後で分ける
         /** n x n
          * [
          *  [ , , , ]
@@ -145,12 +146,33 @@ export class BoardsController{
 export class PlayersController{
 
     static create(playersParams){
+
         return new Player(playersParams);
+
     }
     static addForm(){
 
-        document.getElementById(TARGETIDs.playersInfo).innerHTML += PlayersViewTamplate.form(true)
+        
 
+        document.getElementById(TARGETIDs.playersInfo).innerHTML += PlayersViewTamplate.form(true)
+        PlayersListener.form()
+        PlayersController.removeAddPlayerBtnIfIsLimit()
+        
+
+    }
+    static addAddPlayerBtnIfIsntLimit(){
+        if(document.querySelectorAll(`.${TARGETIDs.playerInfo}`).length < LIMITATION.maxPlayerNumber ){
+
+            document.getElementById(TARGETIDs.addPlayerInfo).classList.add("fas", "fa-plus-circle", "fa-2x", "text-info" )
+
+        }
+    }
+    static removeAddPlayerBtnIfIsLimit(){
+        if(document.querySelectorAll(`.${TARGETIDs.playerInfo}`).length >= LIMITATION.maxPlayerNumber ){
+
+            document.getElementById(TARGETIDs.addPlayerInfo).classList.remove("fas", "fa-plus-circle", "fa-2x", "text-info" )
+
+        }
     }
 
 }
