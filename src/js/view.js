@@ -82,11 +82,14 @@ export class AppsView {
         body.classList.add("position-relative")
 
         body.innerHTML += `
-        <div id="${TARGETIDs.endGamePopUp}" class="position-absolute top-50 start-50 translate-middle bg-danger card" >
+        <div id="${TARGETIDs.endGamePopUp}" class="position-absolute top-50 start-50 translate-middle card shadow" >
             <div class="card-body">
-                <h5 class="card-title">${player? player.name:"unknown"} is the winner!!!🎉</h5>
-                <button id="${TARGETIDs.goToTop}" class="btn btn-info">Got to Top</button>
-                <button id="${TARGETIDs.retry}" class="btn btn-info">Retry</button>
+                <h2 class="card-title">${player? player.name:"unknown"} is the winner!!!🎉</h2>
+
+                <div class="mt-3">
+                    <button id="${TARGETIDs.goToTop}" class="btn btn-info">Got to Top</button>
+                    <button id="${TARGETIDs.retry}" class="btn btn-info">Retry</button>
+                </div>
             </div>
         </div>
         `
